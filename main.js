@@ -4,7 +4,7 @@ function getEle(id) {
 
 var dsnv = new DanhSachNhanVien();
 
-// getLocalStorage();
+getLocalStorage();
 
 function setLocalStorage() {
   // Convert data form Json to String
@@ -13,15 +13,15 @@ function setLocalStorage() {
   localStorage.setItem("DSNV", dataString);
 }
 
-// function getLocalStorage() {
-//   if (localStorage.getItem("DSNV")) {
-//     var dataString = localStorage.getItem("DSNV");
-//     // Convert data form String to Json
-//     var dataJson = JSON.parse(dataString);
-//     dsnv.arr = dataJson;
-//     taoBang(dsnv.arr);
-//   }
-// }
+function getLocalStorage() {
+  if (localStorage.getItem("DSNV")) {
+    var dataString = localStorage.getItem("DSNV");
+    // Convert data form String to Json
+    var dataJson = JSON.parse(dataString);
+    dsnv.arr = dataJson;
+    taoBang(dsnv.arr);
+  }
+}
 
 function layThongTinNhanVien() {
   // DOM value
@@ -65,6 +65,8 @@ function inRaBang(data) {
     <td> ${item.chucVu} </td>
     <td> ${item.tongLuong} </td>
     <td> ${item.loaiNhanVien} </td>
+    <td onclick="capNhatNV()" class="btn btn-info" style="width:50%;" data-toggle="modal" data-target="#myModal"> Sửa </td>
+    <td onclick="xoaNV('${item.taiKhoan}')" class="btn btn-danger" style="width:50%;"> Xóa </td>
     </tr>
     `;
   });
@@ -84,3 +86,8 @@ getEle("#btnThemNV").onclick = function () {
 };
 
 // Xóa nhân viên
+function xoaNV(taiKhoan) {
+  console.log(dsnv.arr);
+  dsnv.xoaNV(taiKhoan);
+  console.log(dsnv.arr);
+}
