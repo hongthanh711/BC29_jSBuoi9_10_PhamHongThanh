@@ -1,3 +1,5 @@
+const form = document.querySelector("form");
+
 function getEle(id) {
   return document.querySelector(id);
 }
@@ -19,12 +21,12 @@ function getLocalStorage() {
     // Convert data form String to Json
     var dataJson = JSON.parse(dataString);
     dsnv.arr = dataJson;
-    taoBang(dsnv.arr);
+    inRaBang(dsnv.arr);
   }
 }
 
 function layThongTinNhanVien() {
-  // DOM value
+  // DOM innerHTMLnerHTML
   var _taiKhoan = getEle("#tknv").value;
   var _name = getEle("#name").value;
   var _email = getEle("#email").value;
@@ -65,7 +67,7 @@ function inRaBang(data) {
     <td> ${item.chucVu} </td>
     <td> ${item.tongLuong} </td>
     <td> ${item.loaiNhanVien} </td>
-    <td onclick="capNhatNV()" class="btn btn-info" style="width:50%;" data-toggle="modal" data-target="#myModal"> Sửa </td>
+    <td onclick="suaNV('${item.taiKhoan}')" class="btn btn-info" style="width:50%;" data-toggle="modal" data-target="#myModal"> Sửa </td>
     <td onclick="xoaNV('${item.taiKhoan}')" class="btn btn-danger" style="width:50%;"> Xóa </td>
     </tr>
     `;
@@ -83,11 +85,28 @@ getEle("#btnThemNV").onclick = function () {
   inRaBang(dsnv.arr);
 
   setLocalStorage();
+  form.reset();
 };
 
 // Xóa nhân viên
 function xoaNV(taiKhoan) {
-  console.log(dsnv.arr);
   dsnv.xoaNV(taiKhoan);
-  console.log(dsnv.arr);
+  inRaBang(dsnv.arr);
+  setLocalStorage();
+}
+
+// Sửa
+function suaNV(taiKhoan) {
+  // getEle("#btnThemNV").style.display = "none"; // cho hiện lại ở đâu ?
+  var sv = dsnv.suaNV(taiKhoan);
+  if (sv) {
+    getEle("#tknv").value = sv.taiKhoan;
+    getEle("#name").value = sv.name;
+    getEle("#email").value = sv.email;
+    getEle("#password").value = sv.password;
+    getEle("#datepicker").value = sv.ngayLam;
+    getEle("#luongCB").value = sv.luongCB;
+    getEle("#chucvu").value = sv.chucVu;
+    getEle("#gioLam").value = sv.gioLam;
+  }
 }
