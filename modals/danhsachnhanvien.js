@@ -6,9 +6,9 @@ function DanhSachNhanVien() {
     this.arr.forEach(function (item, index) {
       if (item.taiKhoan === taiKhoan) {
         i = index;
-        return i;
       }
     });
+    return i;
   };
 
   this.themNV = function (nhanVien) {
@@ -31,4 +31,15 @@ function DanhSachNhanVien() {
   };
 
   this.capNhatNV = function () {};
+
+  this.timKiemNV = function (keyword) {
+    var mangTimKiem = [];
+    this.arr.forEach(function (item) {
+      if (item.loaiNhanVien.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
+        mangTimKiem.push(item);
+      }
+    });
+
+    return mangTimKiem;
+  };
 }
