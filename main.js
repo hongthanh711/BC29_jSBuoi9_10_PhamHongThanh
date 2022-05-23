@@ -217,7 +217,9 @@ function suaNV(taiKhoan) {
     getEle("#gioLam").value = sv.gioLam;
   }
   // Disable
-  // getEle("#tknv").disabled = true;
+  getEle("#tknv").disabled = true;
+
+  getEle("#btnThemNV").style.display = "none";
 }
 
 // Cập nhật
@@ -226,6 +228,7 @@ getEle("#btnCapNhat").onclick = function () {
   dsnv.capNhatNV(nhanVien);
   inRaBang(dsnv.arr);
   setLocalStorage();
+  form.reset();
 };
 
 // Tìm kiếm
@@ -235,3 +238,8 @@ getEle("#searchName").addEventListener("keyup", function () {
   var mangTimKiem = dsnv.timKiemNV(keyword);
   inRaBang(mangTimKiem);
 });
+
+getEle("#btnThem").onclick = function () {
+  getEle("#btnThemNV").style.display = "inline-block";
+  getEle("#tknv").disabled = false;
+};
