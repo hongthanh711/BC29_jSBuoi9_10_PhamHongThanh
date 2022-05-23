@@ -49,15 +49,14 @@ function layThongTinNhanVien() {
       6,
       "#tbTKNV",
       "Vui lòng nhập tài khoản từ 4 đến 6 ký số"
+    ) &&
+    validation.kiemTraKySo(_taiKhoan, "#tbTKNV", "Vui lòng nhập số") &&
+    validation.kiemTraTrung(
+      _taiKhoan,
+      dsnv.arr,
+      "#tbTKNV",
+      "Tài khoản đã tồn tại"
     );
-  // &&
-  // validation.kiemTraKySo(_taiKhoan, "#tbTKNV", "Vui lòng nhập số") &&
-  // validation.kiemTraTrung(
-  //   _taiKhoan,
-  //   dsnv.arr,
-  //   "#tbTKNV",
-  //   "Tài khoản đã tồn tại"
-  // );
 
   // Tên nhân viên
   isValid &=
@@ -215,19 +214,22 @@ function suaNV(taiKhoan) {
     getEle("#chucvu").value = sv.chucVu;
     getEle("#gioLam").value = sv.gioLam;
   }
+  // Disable
+  // getEle("#tknv").disabled = true;
 }
 
 // Cập nhật
 getEle("#btnCapNhat").onclick = function () {
-  var sinhVien = layThongTinNhanVien();
-  console.log(sinhVien);
+  var nhanVien = layThongTinNhanVien();
+  dsnv.capNhatNV(nhanVien);
+  inRaBang(dsnv.arr);
+  setLocalStorage();
 };
 
 // Tìm kiếm
 
 getEle("#searchName").addEventListener("keyup", function () {
   var keyword = getEle("#searchName").value;
-  console.log(keyword);
   var mangTimKiem = dsnv.timKiemNV(keyword);
   inRaBang(mangTimKiem);
 });

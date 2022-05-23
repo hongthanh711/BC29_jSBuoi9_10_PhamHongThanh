@@ -30,7 +30,12 @@ function DanhSachNhanVien() {
     return null;
   };
 
-  this.capNhatNV = function () {};
+  this.capNhatNV = function (nhanVien) {
+    var i = this.timViTri(nhanVien.taiKhoan);
+    if (i !== -1) {
+      dsnv.arr[i] = nhanVien;
+    }
+  };
 
   this.timKiemNV = function (keyword) {
     var mangTimKiem = [];

@@ -108,20 +108,20 @@ function Validation() {
     return false;
   };
 
-  //   this.kiemTraTrung = function (value, arr, errorId, mess) {
-  //     var isStatus = true;
-  //     arr.forEach(function (item) {
-  //       if (item.taiKhoan === value) {
-  //         isStatus = false;
-  //       }
-  //     });
-  //     if (isStatus) {
-  //       getEle(errorId).innerHTML = "";
-  //       getEle(errorId).style.display = "none";
-  //       return true;
-  //     }
-  //     getEle(errorId).innerHTML = mess;
-  //     getEle(errorId).style.display = "block";
-  //     return false;
-  //   };
+  this.kiemTraTrung = function (value, arr, errorId, mess) {
+    var isStatus = true;
+    arr.forEach(function (item) {
+      if (item.taiKhoan === value) {
+        isStatus = false;
+      }
+    });
+    if (isStatus) {
+      getEle(errorId).innerHTML = "";
+      getEle(errorId).style.display = "none";
+      return true;
+    }
+    getEle(errorId).innerHTML = mess;
+    getEle(errorId).style.display = "block";
+    return false;
+  };
 }
