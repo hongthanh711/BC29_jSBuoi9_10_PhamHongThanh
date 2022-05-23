@@ -25,7 +25,7 @@ function getLocalStorage() {
   }
 }
 
-function layThongTinNhanVien() {
+function layThongTinNhanVien(isAdd) {
   // DOM innerHTMLnerHTML
   var _taiKhoan = getEle("#tknv").value;
   var _name = getEle("#name").value;
@@ -41,22 +41,24 @@ function layThongTinNhanVien() {
 
   // Check Validation
   // Tài khoản
-  isValid &=
-    validation.kiemTraRong(_taiKhoan, "#tbTKNV", "Vui lòng nhập tài khoản") &&
-    validation.kiemTraDoDaiKyTu(
-      _taiKhoan,
-      4,
-      6,
-      "#tbTKNV",
-      "Vui lòng nhập tài khoản từ 4 đến 6 ký số"
-    ) &&
-    validation.kiemTraKySo(_taiKhoan, "#tbTKNV", "Vui lòng nhập số") &&
-    validation.kiemTraTrung(
-      _taiKhoan,
-      dsnv.arr,
-      "#tbTKNV",
-      "Tài khoản đã tồn tại"
-    );
+  if (isAdd) {
+    isValid &=
+      validation.kiemTraRong(_taiKhoan, "#tbTKNV", "Vui lòng nhập tài khoản") &&
+      validation.kiemTraDoDaiKyTu(
+        _taiKhoan,
+        4,
+        6,
+        "#tbTKNV",
+        "Vui lòng nhập tài khoản từ 4 đến 6 ký số"
+      ) &&
+      validation.kiemTraKySo(_taiKhoan, "#tbTKNV", "Vui lòng nhập số") &&
+      validation.kiemTraTrung(
+        _taiKhoan,
+        dsnv.arr,
+        "#tbTKNV",
+        "Tài khoản đã tồn tại"
+      );
+  }
 
   // Tên nhân viên
   isValid &=
@@ -181,11 +183,11 @@ function inRaBang(data) {
 
 // Thêm nhân viên
 getEle("#btnThemNV").onclick = function () {
-  var nhanVien = layThongTinNhanVien();
-
-  dsnv.themNV(nhanVien);
+  var nhanVien = layThongTinNhanVien(true);
 
   if (nhanVien) {
+    dsnv.themNV(nhanVien);
+
     inRaBang(dsnv.arr);
 
     setLocalStorage();
@@ -220,7 +222,7 @@ function suaNV(taiKhoan) {
 
 // Cập nhật
 getEle("#btnCapNhat").onclick = function () {
-  var nhanVien = layThongTinNhanVien();
+  var nhanVien = layThongTinNhanVien(false);
   dsnv.capNhatNV(nhanVien);
   inRaBang(dsnv.arr);
   setLocalStorage();
